@@ -4,60 +4,41 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
   StatusBar,
   Dimensions,
 } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const { width, height } = Dimensions.get('window');
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [birthday, setBirthday] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
-  const handleLogin = () => {
+  const handleRegister = () => {
   };
 
-  const handleForgotPassword = () => {
+  const handleSignIn = () => {
   };
 
-  const handleSignUp = () => {
+  const handleGoogleRegister = () => {
   };
 
-  const handleGoogleLogin = () => {
-  };
-
-  const handleFacebookLogin = () => {
+  const handleFacebookRegister = () => {
   };
 
   return (
-    // <SafeAreaProvider>
-    //   <SafeAreaView className="flex-1">
     <>
       <StatusBar barStyle="light-content" backgroundColor="#7C3AED" />
 
       {/* Gradient Background */}
       <View className="flex-1" style={{ backgroundColor: '#7C3AED' }}>
-        {/* <View className="flex-1 bg-purple-700"> */}
-        {/* <KeyboardAvoidingView
-          className="flex-1"
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
-          <ScrollView
-            className="flex-1"
-            contentContainerStyle={{ flexGrow: 1 }}
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={true}
-          > */}
-
-        {/* Top Section - Logo and Welcome */}
-
-
         <View className="flex-1 items-center justify-center px-8 pt-16 pb-16">
           {/* App Logo */}
           <View className="items-center mb-16">
@@ -66,44 +47,63 @@ const LoginScreen = () => {
             </View>
 
             <Text className="text-white text-3xl font-bold mb-2">
-              Welcome Back
+              Create Account
             </Text>
             <Text className="text-purple-100 text-center text-base">
-              Sign in to continue to your account
+              Sign up to get started with your account
             </Text>
           </View>
-          {/* 
-          <View
-            className="rounded-t-3xl overflow-hidden bg-white"
-          > */}
 
-          {/* Login Form Card */}
+          {/* Register Form Card */}
           <View className="flex-1 w-full bg-white rounded-3xl p-6 overflow-hidden shadow-lg">
             <KeyboardAwareScrollView
-              // className="flex-1"
-              // className="w-full"
               contentContainerStyle={{ paddingBottom: 20 }}
               keyboardShouldPersistTaps="handled"
               enableOnAndroid={true}
               extraScrollHeight={20}
               showsVerticalScrollIndicator={false}
             >
-              {/* <View
-              className="w-full bg-white rounded-t-3xl p-8"
-              // className="w-full p-8 shadow-lg"
-              style={{
-                minHeight: height * 0.6,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: -5 },
-                shadowOpacity: 0.1,
-                shadowRadius: 10,
-                elevation: 10,
-              }}
-            > */}
               {/* Form Title */}
               <Text className="text-gray-800 text-2xl font-bold text-center mb-8">
-                Sign In
+                Sign Up
               </Text>
+
+              {/* Name Input */}
+              <View className="mb-6">
+                <Text className="text-gray-600 text-sm font-medium mb-2">
+                  Full Name
+                </Text>
+                <View className="bg-gray-50 rounded-xl border border-gray-200">
+                  <TextInput
+                    className="px-4 py-4 text-gray-800 text-base rounded-xl"
+                    placeholder="Enter your full name"
+                    placeholderTextColor="#9CA3AF"
+                    value={name}
+                    onChangeText={setName}
+                    autoCapitalize="words"
+                    autoCorrect={false}
+                  />
+                </View>
+              </View>
+
+              {/* Phone Number Input */}
+              <View className="mb-6">
+                <Text className="text-gray-600 text-sm font-medium mb-2">
+                  Phone Number
+                </Text>
+                <View className="bg-gray-50 rounded-xl border border-gray-200">
+                  <TextInput
+                    className="px-4 py-4 text-gray-800 text-base rounded-xl"
+                    placeholder="Enter your phone number"
+                    placeholderTextColor="#9CA3AF"
+                    value={phoneNumber}
+                    onChangeText={setPhoneNumber}
+                    keyboardType="phone-pad"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                  />
+                </View>
+              </View>
 
               {/* Email Input */}
               <View className="mb-6">
@@ -125,7 +125,7 @@ const LoginScreen = () => {
               </View>
 
               {/* Password Input */}
-              <View className="mb-4">
+              <View className="mb-6">
                 <Text className="text-gray-600 text-sm font-medium mb-2">
                   Password
                 </Text>
@@ -151,102 +151,61 @@ const LoginScreen = () => {
                 </View>
               </View>
 
-              <View className="mb-4">
+              {/* Confirm Password Input */}
+              <View className="mb-6">
                 <Text className="text-gray-600 text-sm font-medium mb-2">
-                  Password
+                  Confirm Password
                 </Text>
                 <View className="bg-gray-50 rounded-xl border border-gray-200 flex-row items-center">
                   <TextInput
                     className="flex-1 px-4 py-4 text-gray-800 text-base rounded-xl"
-                    placeholder="Enter your password"
+                    placeholder="Confirm your password"
                     placeholderTextColor="#9CA3AF"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry={!isPasswordVisible}
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                    secureTextEntry={!isConfirmPasswordVisible}
                     autoCapitalize="none"
                     autoCorrect={false}
                   />
                   <TouchableOpacity
                     className="px-4"
-                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                    onPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)}
                   >
                     <Text className="text-purple-600 text-sm font-medium">
-                      {isPasswordVisible ? '👁️' : '👁️‍🗨️'}
+                      {isConfirmPasswordVisible ? '👁️' : '👁️‍🗨️'}
                     </Text>
                   </TouchableOpacity>
                 </View>
               </View>
 
-              <View className="mb-4">
+              {/* Birthday Input */}
+              <View className="mb-8">
                 <Text className="text-gray-600 text-sm font-medium mb-2">
-                  Password
+                  Birthday
                 </Text>
-                <View className="bg-gray-50 rounded-xl border border-gray-200 flex-row items-center">
+                <View className="bg-gray-50 rounded-xl border border-gray-200">
                   <TextInput
-                    className="flex-1 px-4 py-4 text-gray-800 text-base rounded-xl"
-                    placeholder="Enter your password"
+                    className="px-4 py-4 text-gray-800 text-base rounded-xl"
+                    placeholder="MM/DD/YYYY"
                     placeholderTextColor="#9CA3AF"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry={!isPasswordVisible}
+                    value={birthday}
+                    onChangeText={setBirthday}
+                    keyboardType="numeric"
                     autoCapitalize="none"
                     autoCorrect={false}
                   />
-                  <TouchableOpacity
-                    className="px-4"
-                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                  >
-                    <Text className="text-purple-600 text-sm font-medium">
-                      {isPasswordVisible ? '👁️' : '👁️‍🗨️'}
-                    </Text>
-                  </TouchableOpacity>
                 </View>
               </View>
 
-              <View className="mb-4">
-                <Text className="text-gray-600 text-sm font-medium mb-2">
-                  Password
-                </Text>
-                <View className="bg-gray-50 rounded-xl border border-gray-200 flex-row items-center">
-                  <TextInput
-                    className="flex-1 px-4 py-4 text-gray-800 text-base rounded-xl"
-                    placeholder="Enter your password"
-                    placeholderTextColor="#9CA3AF"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry={!isPasswordVisible}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                  />
-                  <TouchableOpacity
-                    className="px-4"
-                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                  >
-                    <Text className="text-purple-600 text-sm font-medium">
-                      {isPasswordVisible ? '👁️' : '👁️‍🗨️'}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-
-              {/* Forgot Password */}
-              <View className="items-end mb-8">
-                <TouchableOpacity onPress={handleForgotPassword}>
-                  <Text className="text-purple-600 text-sm font-medium">
-                    Forgot Password?
-                  </Text>
-                </TouchableOpacity>
-              </View>
-
-              {/* Login Button */}
+              {/* Register Button */}
               <TouchableOpacity
                 className="rounded-xl py-4 mb-6"
                 style={{ backgroundColor: '#7C3AED' }}
-                onPress={handleLogin}
+                onPress={handleRegister}
                 activeOpacity={0.8}
               >
                 <Text className="text-white text-center text-lg font-bold">
-                  Sign In
+                  Create Account
                 </Text>
               </TouchableOpacity>
 
@@ -254,7 +213,7 @@ const LoginScreen = () => {
               <View className="flex-row items-center mb-6">
                 <View className="flex-1 h-px bg-gray-300" />
                 <Text className="mx-4 text-gray-500 text-sm">
-                  Or sign in with
+                  Or sign up with
                 </Text>
                 <View className="flex-1 h-px bg-gray-300" />
               </View>
@@ -263,7 +222,7 @@ const LoginScreen = () => {
               <View className="flex-row justify-between mb-8">
                 <TouchableOpacity
                   className="flex-1 border border-gray-300 rounded-xl py-3 mr-2 flex-row items-center justify-center"
-                  onPress={handleGoogleLogin}
+                  onPress={handleGoogleRegister}
                   activeOpacity={0.8}
                 >
                   <Text className="text-red-500 text-lg mr-2">G</Text>
@@ -272,7 +231,7 @@ const LoginScreen = () => {
 
                 <TouchableOpacity
                   className="flex-1 border border-gray-300 rounded-xl py-3 ml-2 flex-row items-center justify-center"
-                  onPress={handleFacebookLogin}
+                  onPress={handleFacebookRegister}
                   activeOpacity={0.8}
                 >
                   <Text className="text-blue-600 text-lg mr-2">f</Text>
@@ -280,31 +239,24 @@ const LoginScreen = () => {
                 </TouchableOpacity>
               </View>
 
-              {/* Sign Up Link */}
+              {/* Sign In Link */}
               <View className="flex-row justify-center items-center">
                 <Text className="text-gray-600 text-base">
-                  Don't have an account?{' '}
+                  Already have an account?{' '}
                 </Text>
-                <TouchableOpacity onPress={handleSignUp}>
+                <TouchableOpacity onPress={handleSignIn}>
                   <Text className="text-purple-600 text-base font-bold">
-                    Sign Up
+                    Sign In
                   </Text>
                 </TouchableOpacity>
               </View>
 
             </KeyboardAwareScrollView>
           </View>
-
-          {/* </View> */}
         </View>
-
-        {/* </ScrollView>
-        </KeyboardAvoidingView> */}
       </View>
     </>
-    //   </SafeAreaView>
-    // </SafeAreaProvider>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
