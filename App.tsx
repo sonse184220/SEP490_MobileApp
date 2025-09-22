@@ -16,9 +16,7 @@ import {
 import LoginScreenDemo from './src/test/LoginScreenDemo';
 export default function App() {
   return (
-    // <SafeAreaProvider>
     <LoginScreenDemo />
-
   );
 }
 // export default function App() {
